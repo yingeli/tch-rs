@@ -447,12 +447,16 @@ fn main() -> anyhow::Result<()> {
             || si_lib.join("torch_cuda_cpp.dll").exists();
         let use_hip =
             si_lib.join("libtorch_hip.so").exists() || si_lib.join("torch_hip.dll").exists();
-        println!("cargo:rustc-link-arg=-Wl,--no-as-needed");
         println!("cargo:rustc-link-search=native={}", si_lib.display());
 
         system_info.make();
 
         println!("cargo:rustc-link-lib=static=tch");
+
+        println!("cargo:rustc-link-arg=-Wl,--no-as-needed");
+        println!("cargo:rustc-link-arg=-Wl,--copy-dt-needed-entries");
+        println!("cargo:rustc-link-arg=-ltorch");
+      
         if use_cuda {
             // system_info.link("torch_cuda")
         }
