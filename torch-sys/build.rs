@@ -490,8 +490,8 @@ fn main() -> anyhow::Result<()> {
             system_info.link("tensorpipe_uv");
             system_info.link("XNNPACK");
         }
-        // system_info.link("torch_cpu");
         system_info.link("torch_cuda");
+        system_info.link("torch_cpu");      
         system_info.link("torch");
         system_info.link("c10");
         if use_hip {
