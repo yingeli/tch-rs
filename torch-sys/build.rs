@@ -454,7 +454,7 @@ fn main() -> anyhow::Result<()> {
         println!("cargo:rustc-link-lib=static=tch");
       
         if use_cuda {
-            system_info.link("torch_cuda")
+            // system_info.link("torch_cuda")
         }
         if use_cuda_cu {
             system_info.link("torch_cuda_cu")
@@ -490,6 +490,7 @@ fn main() -> anyhow::Result<()> {
             system_info.link("tensorpipe_uv");
             system_info.link("XNNPACK");
         }
+        system_info.link("torch_cuda");
         system_info.link("torch_cpu");      
         system_info.link("torch");
         system_info.link("c10");
