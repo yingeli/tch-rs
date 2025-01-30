@@ -449,16 +449,13 @@ fn main() -> anyhow::Result<()> {
             si_lib.join("libtorch_hip.so").exists() || si_lib.join("torch_hip.dll").exists();
         println!("cargo:rustc-link-search=native={}", si_lib.display());
 
-        println!("cargo:rustc-link-arg=-Wl,--no-as-needed");
-        println!("cargo:rustc-link-arg=-Wl,--copy-dt-needed-entries");
-        println!("cargo:rustc-link-arg=-ltorch");
-
         system_info.make();
 
         println!("cargo:rustc-link-lib=static=tch");
       
         if use_cuda {
-            // system_info.link("torch_cuda")
+            panic！("stop here");
+            system_info.link("torch_cuda")
         }
         if use_cuda_cu {
             system_info.link("torch_cuda_cu")
@@ -475,7 +472,6 @@ fn main() -> anyhow::Result<()> {
         if system_info.link_type == LinkType::Static {
             // TODO: this has only be tried out on the cpu version. Check that it works
             // with cuda too and maybe just try linking all available files?
-            /*
             system_info.link("asmjit");
             system_info.link("clog");
             system_info.link("cpuinfo");
@@ -494,9 +490,7 @@ fn main() -> anyhow::Result<()> {
             system_info.link("tensorpipe");
             system_info.link("tensorpipe_uv");
             system_info.link("XNNPACK");
-            */
         }
-        system_info.link("torch_cuda");
         system_info.link("torch_cpu");      
         system_info.link("torch");
         system_info.link("c10");
