@@ -454,7 +454,7 @@ fn main() -> anyhow::Result<()> {
         println!("cargo:rustc-link-lib=static=tch");
       
         if use_cuda {
-            panic！("stop here");
+            panic!("stop here");
             system_info.link("torch_cuda")
         }
         if use_cuda_cu {
