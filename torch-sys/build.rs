@@ -475,6 +475,7 @@ fn main() -> anyhow::Result<()> {
         if system_info.link_type == LinkType::Static {
             // TODO: this has only be tried out on the cpu version. Check that it works
             // with cuda too and maybe just try linking all available files?
+            /*
             system_info.link("asmjit");
             system_info.link("clog");
             system_info.link("cpuinfo");
@@ -493,6 +494,7 @@ fn main() -> anyhow::Result<()> {
             system_info.link("tensorpipe");
             system_info.link("tensorpipe_uv");
             system_info.link("XNNPACK");
+            */
         }
         system_info.link("torch_cuda");
         system_info.link("torch_cpu");      
